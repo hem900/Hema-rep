@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Noir Maison</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/styles.css">
+<style>
+  body { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 24px; }
+  .admin-card {
+    width: 100%; max-width: 400px;
+    background: var(--ink-2);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 44px;
+  }
+  .admin-card h1 { font-size: 1.5rem; margin-bottom: 6px; }
+  .admin-card p.lede { margin-bottom: 28px; font-size: 0.9rem; }
+  .admin-form { display: grid; gap: 18px; }
+  #dashboard-panel { max-width: 640px; }
+  .notice {
+    background: var(--ink-3);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--gold-deep);
+    padding: 18px 20px;
+    border-radius: 2px;
+    font-size: 0.88rem;
+    color: var(--parchment-dim);
+    margin-top: 20px;
+  }
+  .dash-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+</style>
+</head>
+<body>
+
+<section class="admin-card" id="login-panel">
+  <h1>Admin Sign In</h1>
+  <p class="lede">Noir Maison staff access only.</p>
+  <form class="admin-form" id="login-form" novalidate>
+    <div class="field">
+      <label for="admin-username">Username</label>
+      <input type="text" id="admin-username" name="username" autocomplete="username" required>
+    </div>
+    <div class="field">
+      <label for="admin-password">Password</label>
+      <input type="password" id="admin-password" name="password" autocomplete="current-password" required>
+    </div>
+    <button type="submit" class="btn btn-gold" id="login-submit">Sign In</button>
+    <div class="form-status" id="login-status" role="status" aria-live="polite"></div>
+  </form>
+</section>
+
+<section class="admin-card" id="dashboard-panel" hidden>
+  <div class="dash-header">
+    <h1 style="margin:0;">Dashboard</h1>
+    <button class="btn btn-outline" id="logout-btn">Sign Out</button>
+  </div>
+  <p class="lede">You're signed in.</p>
+  <div class="notice">
+    This starter doesn't include a database, so there's no booking list to
+    show here yet — <code>/api/create-order.js</code> only creates a
+    Razorpay order, it doesn't persist bookings anywhere. To show real
+    bookings on this page: save each verified booking to a store (e.g.
+    Vercel Postgres, Supabase, or Airtable) inside
+    <code>/api/verify-payment.js</code> once the signature check passes,
+    then add a small <code>GET /api/bookings</code> route — gated behind
+    the same session cookie this page already checks — for this dashboard
+    to read from.
+  </div>
+</section>
+
+<script src="/assets/admin.js"></script>
+</body>
+</html>
